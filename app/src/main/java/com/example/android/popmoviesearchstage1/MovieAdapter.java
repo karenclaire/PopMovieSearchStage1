@@ -82,7 +82,6 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
             movieGridView.setTag(holder);
         }
         holder = (ViewHolder) movieGridView.getTag();
-        holder.titleTextView.setText(currentMovie.getTitle());
         holder.dateTextView.setText(currentMovie.getReleaseDate());
         holder.ratingTextView.setText(currentMovie.getVoteAverage());
 

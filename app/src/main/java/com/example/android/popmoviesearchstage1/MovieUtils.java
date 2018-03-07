@@ -152,7 +152,7 @@ public class MovieUtils {
                     // Get a single movie at position i within the list of movies
                     JSONObject currentMovie = moviesArray.getJSONObject(i);
 
-                    // Extract the value for the key called "release_date"
+                    // Extract the value for the key called "id"
                     int id = currentMovie.getInt("id");
 
                     // Extract the value for the key called "title"

@@ -15,7 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
     /**
      * URL for Movie API for tmdb
      */
-    private static final String MOVIE_REQUEST_URL = "http://api.themoviedb.org/3/movie/popular?api_key=";
+    private static final String MOVIE_REQUEST_URL = "http://api.themoviedb.org/3/movie/popular?api_key=1502e69c151e6e7b2cc5e7dc651b89bd ";
     /**
      * Constant value for the movie loader ID
      */
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
     /**
      * List of movies
      */
-    private ListView movieGridView;
+    private GridView movieGridView;
 
     /**
      * TextView that is displayed when the list is empty
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
          */
         mRecyclerView.setHasFixedSize(true);
 
-        ListView listView = findViewById(R.id.movie_list);
+        GridView listView = findViewById(R.id.movie_list);
 
         movieGridView= listView;
 
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
                 mMovie = mMovieAdapter.getItem(position);
                 Uri movieUri = Uri.parse(currentMovie.getPosterPath());
                 Intent webIntent = new Intent(Intent.ACTION_VIEW, movieUri);
-                webIntent.putExtra("movie_id", moviesList.get(position).getId());
+                webIntent.putExtra("id", moviesList.get(position).getId());
                 webIntent.putExtra("movie_position", position);
                 startActivity(webIntent);
             }
