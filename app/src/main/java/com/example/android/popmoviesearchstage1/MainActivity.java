@@ -15,7 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
     /**
      * List of movies
      */
-    private GridView movieGridView;
+    private ListView movieGridView;
 
     /**
      * TextView that is displayed when the list is empty
@@ -91,9 +91,9 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
          */
         mRecyclerView.setHasFixedSize(true);
 
-        GridView gridView = findViewById(R.id.movie_list);
+        ListView listView = findViewById(R.id.movie_list);
 
-        movieGridView = gridView;
+        movieGridView= listView;
 
         mMovieAdapter = new MovieAdapter(this, new ArrayList<Movie>());
 
