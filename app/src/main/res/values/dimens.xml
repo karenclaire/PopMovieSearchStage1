@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Height of each movie poster in Main Activity -->
+    <dimen name="poster_height_main">170dp</dimen>
+
+    <!-- Width of each movie poster Main Activity -->
+    <dimen name="poster_width_main">130dp</dimen>
+
+    <!-- Width and heightof each movie poster Detail Activity -->
+    <dimen name="poster_height_detail">200dp</dimen>
+    <dimen name="poster_width_detail">170dp</dimen>
+
+    <dimen name="column_width">170dp</dimen>
+
+    <dimen name="list_item_height">100dp</dimen>
+
+    <dimen name="loading_indicator_size">42dp</dimen>
+
+    <dimen name="list_item_padding_horizontal">16dp</dimen>
+    <dimen name="list_item_padding_vertical">12dp</dimen>
+
+    <dimen name ="list_item_left_margin">16dp</dimen>
+    <dimen name ="list_item_right_margin">16dp</dimen>
+
+    <dimen name = "list_item_text_size">22sp</dimen>
+    <dimen name="detail_item_text_size">16sp</dimen>
+
+    <dimen name="right_left_margin">54dp</dimen>
+
+    <dimen name="right_placeholder_margin">36dp</dimen>
+
+    <dimen name="margin_top_bottom_sides">16dp</dimen>
+
+</resources>

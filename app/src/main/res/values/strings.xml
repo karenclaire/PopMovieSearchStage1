@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Movie Searcher</string>
+    <string name="movie_title_placeholder">A Movie Featuring Me</string>
+    <string name="rating">Rating</string>
+    <string name="popularity">Popularity</string>
+    <string name="release_date">Release Date</string>
+    <string name="duration">Duration</string>
+    <string name="date_placeholder">2018-08-18</string>
+    <string name="duration_placeholder">120 mins</string>
+    <string name="overview">Overview</string>
+    <string name="director">Director</string>
+    <string name="cast">Cast</string>
+    <string name="director_placeholder">Quentin Tarentino</string>
+    <string name="cast_placeholder">Uma Thurman, Lucy Liu, Vivica A. Fox, Michael Madsen, Daryl Hannah
+        David Carradine, Sonny Chiba, Julie Dreyfus, Chiaki Kuriyama, Gordon Liu, Michael Parks</string>
+    <string name="first_trailer">Trailer 1</string>
+    <string name="second_trailer">Trailer 2</string>
+    <string name="rating_placeholder">10</string>
+
+    <string name="most_popular">Most Popular</string>
+    <string name="highest_rated">Highest Rated</string>
+
+    <string name="action_settings">Sort Movies</string>
+
+    <!--For settings_main sorting preferences-->
+    <string name="pref_sorting_criteria_key">sorting_criteria</string>
+    <string name="pref_sorting_criteria_default_value">popularity</string>
+
+    <!-- Text to display in the list when there is no internet connection [CHAR LIMIT=NONE] -->
+    <string name="no_internet">No internet connection.</string>
+
+    <!-- Text to display in the list when there are no movies [CHAR LIMIT=NONE] -->
+    <string name="no_movies">No movies found.</string>
+
+    <!-- Title of the DetailActivity -->
+    <string name="title_activity_detail">Details</string>
+    <!-- Title of the SettingsActivity -->
+    <string name="title_activity_settings">Settings</string>
+
+    <string name="search_for_movie">Search Movies</string>
+
+
+</resources>

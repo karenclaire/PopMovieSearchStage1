@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:paddingBottom="@dimen/list_item_padding_vertical"
+        android:paddingLeft="@dimen/list_item_padding_horizontal"
+        android:paddingRight="@dimen/list_item_padding_horizontal"
+        android:paddingTop="@dimen/list_item_padding_vertical"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/movie_poster"
+            android:layout_width="@dimen/poster_width_main"
+            android:layout_height="@dimen/poster_height_main"
+            tools:src="@drawable/ic_movie_filter_black_24dp"
+            android:layout_gravity="center"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_rating_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:gravity="center"
+            android:text="@string/rating"/>
+
+        <TextView
+            android:id="@+id/tv_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/list_item_right_margin"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textSize="@dimen/list_item_text_size"
+            tools:text="@string/rating_placeholder" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+        <TextView
+            android:id="@+id/tv_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/release_date"
+
+            android:layout_marginLeft="@dimen/list_item_left_margin"
+            app:layout_constraintLeft_toRightOf="@+id/tv_rating_label"
+            app:layout_constraintTop_toBottomOf="@+id/movie_poster"/>
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/list_item_left_margin"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textSize="@dimen/list_item_text_size"
+            tools:text="@string/date_placeholder" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
