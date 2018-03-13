@@ -15,7 +15,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -164,6 +168,7 @@ public class MovieUtils {
 
                     // Extract the value for the key called "release_date"
                     String releaseDate = currentMovie.getString("release_date");
+                    releaseDate = getYear(releaseDate);
 
                     // Extract the image URL for the key called "poster_path" for poster image
                     //String imageUrl = currentMovie.getString("poster_path");
@@ -187,6 +192,19 @@ public class MovieUtils {
             }
             return movies;
         }
+
+    public static String getYear(String dateString){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = parser.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        calendar.setTime(date);
+        return String.valueOf(calendar.get(Calendar.YEAR));
+    }
     }
 
 

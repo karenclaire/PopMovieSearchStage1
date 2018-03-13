@@ -24,6 +24,8 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
     private static final String LOG_TAG = MovieAdapter.class.getSimpleName();
     private static final int VIEW_TYPE_MOVIE_LIST = 0;
     private static final int VIEW_TYPE_MOVIE_DETAILS = 1;
+    public static final String BASE_URL = "http://api.themoviedb.org/3/";
+    public static final String POSTER_PATH = "http://image.tmdb.org/t/p/w185//";
 
     private ArrayList<Movie> mMoviesList;
 
@@ -88,7 +90,8 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         Picasso.with(getContext()).setLoggingEnabled(true);
 
         Picasso.with(getContext())
-                .load(currentMovie.getImageUrl())
+                //.load(currentMovie.getPosterPath())
+                .load(POSTER_PATH +currentMovie.getPosterPath())
                 .into(holder.posterImageView);
 
         return movieGridView;

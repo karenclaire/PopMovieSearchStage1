@@ -53,6 +53,8 @@ public class Movie  implements Parcelable {
 
 
 
+
+
     /**
      * Create a new movie object from five inputs
      *
@@ -128,6 +130,7 @@ public class Movie  implements Parcelable {
     public void setPosterPath(String posterPath) {
         this.mPosterPath = posterPath;
     }
+
 
     @Override
     public int describeContents() {

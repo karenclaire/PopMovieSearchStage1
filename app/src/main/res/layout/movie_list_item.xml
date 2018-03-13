@@ -16,7 +16,9 @@
         android:paddingLeft="@dimen/list_item_padding_horizontal"
         android:paddingRight="@dimen/list_item_padding_horizontal"
         android:paddingTop="@dimen/list_item_padding_vertical"
-        android:orientation="vertical">
+        android:layout_marginLeft="@dimen/margin_top_bottom_sides"
+        android:orientation="vertical"
+        android:background="#000000">
 
         <ImageView
             android:id="@+id/movie_poster"
@@ -27,7 +29,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_gravity="center">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -40,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
+            android:textColor="#FFFFFF"
             android:gravity="center"
             android:text="@string/rating"/>
 
@@ -49,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/list_item_right_margin"
             android:layout_marginTop="4dp"
+            android:textColor="#FFFFFF"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textSize="@dimen/list_item_text_size"
@@ -64,6 +69,7 @@
             android:id="@+id/tv_date_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
             android:text="@string/release_date"
 
             android:layout_marginLeft="@dimen/list_item_left_margin"
@@ -76,6 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/list_item_left_margin"
             android:layout_marginTop="4dp"
+            android:textColor="#FFFFFF"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textSize="@dimen/list_item_text_size"
             tools:text="@string/date_placeholder" />
