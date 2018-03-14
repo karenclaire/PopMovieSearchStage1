@@ -10,18 +10,7 @@ import android.os.Parcelable;
 
 public class Movie  implements Parcelable {
 
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
-        @Override
-        public Movie createFromParcel(Parcel in) {
-            return new Movie(in);
-        }
 
-        @Override
-        public Movie[] newArray(int size) {
-            return new Movie[size];
-        }
-    };
     /**
      * Movie title
      */
@@ -147,6 +136,16 @@ public class Movie  implements Parcelable {
         dest.writeString(mPosterPath);
         dest.writeInt(mId);
     }
+    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
 
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 }
 

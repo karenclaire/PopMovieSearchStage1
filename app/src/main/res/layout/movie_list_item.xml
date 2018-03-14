@@ -16,7 +16,6 @@
         android:paddingLeft="@dimen/list_item_padding_horizontal"
         android:paddingRight="@dimen/list_item_padding_horizontal"
         android:paddingTop="@dimen/list_item_padding_vertical"
-        android:layout_marginLeft="@dimen/margin_top_bottom_sides"
         android:orientation="vertical"
         android:background="#000000">
 

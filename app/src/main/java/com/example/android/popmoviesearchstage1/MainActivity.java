@@ -22,6 +22,18 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+/** * Created by karenulmer on 2/20/2018.
+ *
+ * References used for coding guide and corrections:
+        * 1) https://github.com/first087/Android-ViewHolder-Example/blob/master/app/src/main/java/com/artitk/android_viewholder_example/GridViewActivity.java
+        * 2)https://github.com/ajinkya007/Popular-Movies-Stage-1
+        * 3) https://github.com/bapspatil/FlickOff
+        * 4)https://github.com/henriquenfaria/popular-movies-stage-1
+        * 5) my previous udacity projects: NewsApp and BookApp
+        * 6) https://googledevndscholars.slack.com/threads/
+        * 7)https://gist.github.com/riyazMuhammad/1c7b1f9fa3065aa5a46f
+**/
+
 public class MainActivity extends AppCompatActivity  implements LoaderManager.LoaderCallbacks<List<Movie>> {
 
     /**
@@ -70,6 +82,8 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
     private ProgressBar mProgressBar;
 
     private RecyclerView mRecyclerView;
+
+    static public String lastSortOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,5 +207,6 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
     public void onLoaderReset(Loader<List<Movie>> loader) {
         mMovieAdapter.clear();
     }
+
 
 }
