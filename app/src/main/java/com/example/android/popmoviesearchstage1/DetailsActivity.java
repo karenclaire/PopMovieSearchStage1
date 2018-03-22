@@ -3,21 +3,19 @@ package com.example.android.popmoviesearchstage1;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by karenulmer on 2/20/2018.
@@ -37,26 +35,61 @@ public class DetailsActivity extends AppCompatActivity {
     private static final String LOG_TAG = DetailsActivity.class.getSimpleName();
 
     public static final String EXTRA_MOVIE = "intent_extra_movie";
+    private static final int DEFAULT_POSITION = -1;
+    private String mMovieTitle;
+    public  Intent intent;
 
+    @BindView(R.id.tv_rating)
+    TextView ratingTextView;
+    @BindView (R.id.tv_date) TextView dateTextView;
+    @BindView (R.id.movie_poster)
+    ImageView posterImageView;
+    @BindView(R.id.summary) TextView overviewTextView;
+    @BindView(R.id.title)TextView titleTextView;
+
+
+    public List<Movie> moviesList;
+    Context mContext;
+    private Movie mMovie;
+    private String mUrl;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movie_details);
+        ButterKnife.bind(this);
 
-        if (savedInstanceState == null) {
-            Intent intent = getIntent();
-            if (intent != null && intent.hasExtra(EXTRA_MOVIE)) {
-                DetailsFragment detailsFragment = DetailsFragment.newInstance((Movie) intent
-                        .getParcelableExtra(EXTRA_MOVIE));
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_layout, detailsFragment)
-                        .commit();
-            }
+
+        Intent intent = getIntent();
+        if (intent == null) {
+            closeOnError();
         }
-    }
 
+        int position = intent.getIntExtra("movie_id", DEFAULT_POSITION);
+        if (position == DEFAULT_POSITION) {
+            //POSITION not found in intent
+            closeOnError();
+            return;
+        }
+
+         moviesList.get(position);
+        if (mMovie == null) {
+            //MOVIE DETAILS not available
+            closeOnError();
+            return;
+
+        }else {
+
+            showMovieDetails();
+            Picasso.with(mContext).setLoggingEnabled(true);
+
+            Picasso.with(mContext)
+                    .load(MovieAdapter.POSTER_PATH + mMovie.getPosterPath())
+                    .into(posterImageView);
+        }
+
+    }
 
 
     @Override
@@ -78,71 +111,29 @@ public class DetailsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static class DetailsFragment extends Fragment {
 
-        public DetailsFragment() {  }
-
-        private static final String ARG_MOVIE = "arg_movie";
-        public  Intent intent;
-
-        @BindView(R.id.tv_rating)
-        TextView ratingTextView;
-        @BindView (R.id.tv_date) TextView dateTextView;
-        @BindView (R.id.movie_poster)
-        ImageView posterImageView;
-        @BindView(R.id.tv_summary) TextView overviewTextView;
-        @BindView(R.id.title)TextView titleTextView;
-
-        public ArrayList<Movie> moviesList;
-        Context mContext;
-        private Movie mMovie;
-
-
-
-        //Create new Fragment instance
-         public static DetailsFragment newInstance(Movie movieSelected) {
-         DetailsFragment fragment = new DetailsFragment();
-         Bundle args = new Bundle();
-         args.putParcelable(ARG_MOVIE, movieSelected);
-         fragment.setArguments(args);
-         return fragment;
-         }
-
-         @Override
-         public void onCreate(Bundle savedInstanceState) {
-         super.onCreate(savedInstanceState);
-         if (getArguments() != null) {
-         mMovie = getArguments().getParcelable(ARG_MOVIE);
-         }
-         }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-
-            View view = inflater.inflate(R.layout.fragment_details, container, false);
-
-            if (mMovie == null) {
-                int id = intent.getIntExtra("movie_id", 0);
-                int movie_position = intent.getIntExtra("movie_position", 0);
-                mMovie = moviesList.get(movie_position);
-                dateTextView.setText(mMovie.getReleaseDate());
-                ratingTextView.setText(mMovie.getVoteAverage());
-                overviewTextView.setText(mMovie.getOverview());
-                titleTextView.setText(mMovie.getTitle());
-
-                Picasso.with(mContext).setLoggingEnabled(true);
-
-                Picasso.with(mContext)
-                        .load(MovieAdapter.POSTER_PATH + mMovie.getPosterPath())
-                        .into(posterImageView);
-            }
-            return view;
-        }
+    private void closeOnError() {
+        finish();
+        Toast.makeText(this, R.string.no_movies, Toast.LENGTH_SHORT).show();
     }
 
 
+
+    public void showMovieDetails() {
+            int position = intent.getIntExtra("movie_id", 0);
+            mMovie = moviesList.get(position);
+            dateTextView.setText(mMovie.getReleaseDate());
+            ratingTextView.setText(mMovie.getVoteAverage());
+            overviewTextView.setText(mMovie.getOverview());
+            titleTextView.setText(mMovie.getTitle());
+
+
+    }
 }
+
+
+
+
 
 
 

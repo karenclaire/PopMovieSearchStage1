@@ -8,6 +8,7 @@
     <string name="date_placeholder">2018-08-18</string>
     <string name="duration_placeholder">120 mins</string>
     <string name="overview">Overview</string>
+    <string name="overview_placeholder">Once upon a time...</string>
     <string name="director">Director</string>
     <string name="cast">Cast</string>
     <string name="director_placeholder">Quentin Tarentino</string>
@@ -25,6 +26,7 @@
     <!--For settings_main sorting preferences-->
     <string name="pref_sorting_criteria_key">sorting_criteria</string>
     <string name="pref_sorting_criteria_default_value">popularity</string>
+    <string name="pref_sorting_criteria_top_rated">top_rated</string>
 
     <!-- Text to display in the list when there is no internet connection [CHAR LIMIT=NONE] -->
     <string name="no_internet">No internet connection.</string>
@@ -38,6 +40,8 @@
     <string name="title_activity_settings">Settings</string>
 
     <string name="search_for_movie">Search Movies</string>
+
+    <string name="settings_title">Movie Search Settings</string>
 
 
 </resources>

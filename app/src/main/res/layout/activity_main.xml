@@ -12,20 +12,11 @@ tools:context="com.example.android.popmoviesearchstage1.MainActivity">
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:columnWidth="@dimen/column_width"
-            android:numColumns="auto_fit"
             android:verticalSpacing="10dp"
             android:horizontalSpacing="10dp"
+            android:numColumns="auto_fit"
             android:stretchMode="columnWidth"
             android:gravity="center"/>
-
-    <!--<ListView
-        android:id="@+id/movie_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:iconifiedByDefault="false"
-        android:verticalSpacing="10dp"
-        android:horizontalSpacing="10dp"
-        />-->
 
 
     <android.support.v7.widget.RecyclerView

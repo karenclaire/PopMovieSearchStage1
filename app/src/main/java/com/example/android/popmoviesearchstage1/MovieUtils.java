@@ -28,15 +28,22 @@ import java.util.List;
 
 public class MovieUtils {
 
-         /**
-         * Tag for log messages
-         */
-        public static final String LOG_TAG = MovieUtils.class.getName();
+     /**
+     * Tag for log messages
+     */
+    public static final String LOG_TAG = MovieUtils.class.getName();
 
-        private MovieUtils() {
+    /**
+     * URL for Movie API for tmdb
+     */
+
+
+    public MovieUtils() {
         }
 
-        /**
+
+
+    /**
          * Query the TMDB API and return a list of {@link Movie} objects.
          */
 
@@ -77,6 +84,7 @@ public class MovieUtils {
         private static String makeHttpRequest(URL url) throws IOException {
             String jsonResponse = "";
 
+
             // If the URL is null, then return early.
             if (url == null) {
                 return jsonResponse;
@@ -84,6 +92,8 @@ public class MovieUtils {
 
             HttpURLConnection urlConnection = null;
             InputStream inputStream = null;
+
+
             try {
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setReadTimeout(10000 /* milliseconds */);
@@ -96,6 +106,7 @@ public class MovieUtils {
                 if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                     inputStream = urlConnection.getInputStream();
                     jsonResponse = readFromStream(inputStream);
+
                 } else {
                     Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
                 }
@@ -178,7 +189,7 @@ public class MovieUtils {
                     String overview = currentMovie.getString("overview");
 
 
-                    // Create a new {@link Movie} object with the title,  release date, average vote, imageUrl and id
+                    // Create a new {@link Movie} object with the title,  release date, average vote, id
                     // and url from the JSON response.
                     Movie movie = new Movie(id, title, releaseDate, overview, voteAverage,  posterPath );
 
@@ -186,9 +197,10 @@ public class MovieUtils {
                     movies.add(movie);
 
 
+
                 }
             }catch(JSONException e){
-                Log.e("QueryUtils", "Problem parsing the News JSON results", e);
+                Log.e("MovieUtils", "Problem parsing the News JSON results", e);
             }
             return movies;
         }
@@ -205,7 +217,9 @@ public class MovieUtils {
         calendar.setTime(date);
         return String.valueOf(calendar.get(Calendar.YEAR));
     }
-    }
+
+}
+
 
 
 

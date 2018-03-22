@@ -21,9 +21,9 @@ public class Movie  implements Parcelable {
      */
     private String mReleaseDate;
     /**
-     * Image URL
+     * Movie URL
      */
-    private String mImageUrl;
+    private String mMovieUrl;
 
     /**
      *  Overview
@@ -35,13 +35,12 @@ public class Movie  implements Parcelable {
      */
     private String mVoteAverage;
 
+    /**
+     * Poster Path
+     */
     private String mPosterPath;
 
     int mId;
-
-
-
-
 
 
     /**
@@ -56,7 +55,7 @@ public class Movie  implements Parcelable {
 
         mTitle = title;
         mReleaseDate = releaseDate;
-        //mImageUrl = imageUrl;
+        //mMovieUrl = movieUrl;
         mOverview = overview;
         mVoteAverage = voteAverage;
         mId = id;
@@ -67,7 +66,7 @@ public class Movie  implements Parcelable {
     protected Movie(Parcel in) {
         mTitle = in.readString();
         mReleaseDate = in.readString();
-        //mImageUrl = in.readString();
+        //mMovieUrl = in.readString();
         mOverview = in.readString();
         mVoteAverage = in.readString();
         mId = in.readInt();
@@ -93,12 +92,12 @@ public class Movie  implements Parcelable {
     }
 
     /**
-     * Get the image URL of the movie
+     * Get the URL of the movie
      */
-    public String getImageUrl() { return mImageUrl; }
+    public String getMovieUrl() { return mMovieUrl; }
 
     /**
-     * Get the URL of the movie
+     * Get the overview of the movie
      */
     public String getOverview() {
         return mOverview;
@@ -130,7 +129,7 @@ public class Movie  implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(mTitle);
         dest.writeString(mReleaseDate);
-        //dest.writeString(mImageUrl);
+        //dest.writeString(mMovieUrl);
         dest.writeString(mOverview);
         dest.writeString(mVoteAverage);
         dest.writeString(mPosterPath);

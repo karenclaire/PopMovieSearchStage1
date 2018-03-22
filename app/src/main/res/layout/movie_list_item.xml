@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -17,6 +18,7 @@
         android:paddingRight="@dimen/list_item_padding_horizontal"
         android:paddingTop="@dimen/list_item_padding_vertical"
         android:orientation="vertical"
+        android:layout_gravity="center"
         android:background="#000000">
 
         <ImageView
@@ -91,4 +93,4 @@
     </LinearLayout>
     </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>

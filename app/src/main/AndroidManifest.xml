@@ -33,11 +33,16 @@
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value="com.example.android.popmoviesearchstage1.MainActivity"/>
         </activity>
 
         <!--The manifest entry for our SettingsActivity. Each Activity requires a manifest entry-->
-        <activity android:name=".SettingsActivity"/>
+        <activity android:name="com.example.android.popmoviesearchstage1.SettingsActivity"
+            android:label="@string/settings_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.popmoviesearchstage1.MainActivity"/>
+        </activity>/>
 
     </application>
 

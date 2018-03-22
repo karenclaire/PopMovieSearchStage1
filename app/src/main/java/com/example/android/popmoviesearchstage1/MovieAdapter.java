@@ -90,7 +90,6 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         Picasso.with(getContext()).setLoggingEnabled(true);
 
         Picasso.with(getContext())
-                //.load(currentMovie.getPosterPath())
                 .load(POSTER_PATH +currentMovie.getPosterPath())
                 .into(holder.posterImageView);
 
