@@ -295,11 +295,11 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
    public static boolean isTopRated(Context context) {
        // Return true if the user's preference for units is top rating movies,false otherwise
 
-       SharedPreferences prefs = PreferenceManager
+       SharedPreferences sharedPrefs = PreferenceManager
                .getDefaultSharedPreferences(context);
-       String keyForTopRated = context.getString(R.string.pref_sorting_criteria_top_rated);
+       String topRatedPref = context.getString(R.string.pref_sorting_criteria_top_rated);
        String defaultPref = context.getString(R.string.pref_sorting_criteria_default_value);
-       String preferredList = prefs.getString(keyForTopRated, defaultPref);
+       String preferredList = sharedPrefs.getString(topRatedPref, defaultPref);
        String topRated = context.getString(R.string.pref_sorting_criteria_top_rated);
        boolean userPrefersTopRated;
        if (topRated.equals(preferredList)) {
