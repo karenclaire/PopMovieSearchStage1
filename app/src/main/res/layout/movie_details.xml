@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--created by Karen Claire Ulmer, 18 Feb 2018 --><!-- image credit: https://material.io/icons/#ic_movie_filter-->
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000">
+    android:background="#000000">-->
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+
+        android:background="#000000">
 
         <TextView
             android:id="@+id/title"
@@ -258,4 +263,4 @@
             app:layout_constraintGuide_begin="20dp" />
 
     </android.support.constraint.ConstraintLayout>
-</ScrollView>
+<!--</ScrollView>-->

@@ -13,6 +13,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,17 +40,16 @@ import butterknife.BindView;
         * 7)https://gist.github.com/riyazMuhammad/1c7b1f9fa3065aa5a46f
 **/
 
-public class MainActivity extends AppCompatActivity  implements LoaderManager.LoaderCallbacks<List<Movie>> {
-
+public class MainActivity extends AppCompatActivity  implements LoaderManager.LoaderCallbacks<List<Movie>>, SharedPreferences.OnSharedPreferenceChangeListener{
     /**
      * Tag for log messages
      */
-    public static final String LOG_TAG = MainActivity.class.getName();
+    public static final String TAG = MainActivity.class.getName();
     /**
      * URL for Movie API for tmdb
      */
-    private static final String MOVIE_REQUEST_URL = "http://api.themoviedb.org/3/movie/popular?api_key=";
-    private static final String MOVIE_TOP_RATED_URL = "http://api.themoviedb.org/3/movie/top_rated?api_key=";
+    private static final String MOVIE_REQUEST_URL = "http://api.themoviedb.org/3/movie/popular?api_key=1502e69c151e6e7b2cc5e7dc651b89bd";
+    private static final String MOVIE_TOP_RATED_URL = "http://api.themoviedb.org/3/movie/top_rated?api_key=1502e69c151e6e7b2cc5e7dc651b89bd";
     public static final String POSTER_PATH = "http://image.tmdb.org/t/p/w185//";
     public static final String BASE_URL = "http://api.themoviedb.org/3/movie/";
     public static final String API_KEY = "";
@@ -91,8 +91,7 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
     private RecyclerView mRecyclerView;
 
 
-    public String sortPref;
-
+    private static boolean PREFERENCE_UPDATED = false;
 
     @BindView(R.id.tv_rating)
     TextView ratingTextView;
@@ -166,6 +165,8 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
         if (isConnected()) {
             LoaderManager loaderManager = getLoaderManager();
             loaderManager.initLoader(MOVIE_LOADER_ID, null, this);
+            Log.d(TAG, "onCreate: registering preference changed listener");
+            PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
 
         } else {
             mProgressBar.setVisibility(View.GONE);
@@ -212,26 +213,48 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         String popularity = sharedPrefs.getString(getString(R.string.pref_sorting_criteria_key), getString(R.string.pref_sorting_criteria_default_value));
-        String topRated = sharedPrefs.getString(getString(R.string.pref_sorting_criteria_key), getString(R.string.pref_sorting_criteria_top_rated));
+        //String topRated = sharedPrefs.getString(getString(R.string.pref_sorting_criteria_key), getString(R.string.pref_sorting_criteria_top_rated));
 
-        boolean sortingCriteriaValue = false;
+         if (PREFERENCE_UPDATED ==true) {
+             Uri baseUri = Uri.parse(MOVIE_TOP_RATED_URL);
+             Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        if (popularity.equals(sortingCriteriaValue) == true ) {
-            Uri baseUri = Uri.parse(MOVIE_TOP_RATED_URL);
-            Uri.Builder uriBuilder = baseUri.buildUpon();
+             return new MovieLoader(this, uriBuilder.toString());
 
-            return new MovieLoader(this, uriBuilder.toString());
+         } if (!PREFERENCE_UPDATED){
+             Uri baseUri = Uri.parse(MOVIE_REQUEST_URL);
+             Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        } if (sortingCriteriaValue == false) {
-
-            Uri baseUri = Uri.parse(MOVIE_REQUEST_URL);
-            Uri.Builder uriBuilder = baseUri.buildUpon();
-
-            return new MovieLoader(this, uriBuilder.toString());
-        }
-        return null;
+             return new MovieLoader(this, uriBuilder.toString());
+         }
+        return  null;
     }
 
+    /**
+     * In onStart, if preferences have been changed, refresh the data and set the flag to false
+     */
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (PREFERENCE_UPDATED) {
+            Log.d(TAG, "onResume: preferences were updated");
+            LoaderManager loaderManager = getLoaderManager();
+            loaderManager.restartLoader((MOVIE_LOADER_ID), null, this);
+            PREFERENCE_UPDATED = false;
+       }
+    }
+
+    @Override
+    protected void onResume() {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (PREFERENCE_UPDATED == isTopRated(this)){
+            showTopRated();
+
+        } showPopular();
+
+        super.onResume();
+    }
 
     @Override
     public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> movies) {
@@ -254,6 +277,50 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra(DetailsActivity.EXTRA_MOVIE, position);
         startActivity(intent);
+
+
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+     PREFERENCE_UPDATED = true;
+    }
+
+   public static boolean isTopRated(Context context) {
+       // Return true if the user's preference for units is top rating movies,false otherwise
+
+       SharedPreferences prefs = PreferenceManager
+               .getDefaultSharedPreferences(context);
+       String keyForTopRated = context.getString(R.string.pref_sorting_criteria_top_rated);
+       String defaultPref = context.getString(R.string.pref_sorting_criteria_default_value);
+       String preferredList = prefs.getString(keyForTopRated, defaultPref);
+       String topRated = context.getString(R.string.pref_sorting_criteria_top_rated);
+       boolean userPrefersTopRated;
+       if (topRated.equals(preferredList)) {
+           userPrefersTopRated = true;
+       } else {
+           userPrefersTopRated = false;
+       }
+       return userPrefersTopRated;
+    }
+
+    public MovieLoader showTopRated(){
+        Uri baseUri = Uri.parse(MOVIE_TOP_RATED_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        return new MovieLoader(this, uriBuilder.toString());
+    }
+
+    public MovieLoader showPopular(){
+        Uri baseUri = Uri.parse(MOVIE_REQUEST_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        return new MovieLoader(this, uriBuilder.toString());
+    }
 }
