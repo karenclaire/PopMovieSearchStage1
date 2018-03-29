@@ -19,13 +19,13 @@ tools:context="com.example.android.popmoviesearchstage1.MainActivity">
             android:gravity="center"/>
 
 
-    <android.support.v7.widget.RecyclerView
+    <!--<android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:paddingBottom="8dp"
-        app:layoutManager="GridLayoutManager"/>
+        app:layoutManager="GridLayoutManager"/>-->
 
 
         <!-- Empty view is only visible when the list has no items. -->
@@ -33,7 +33,6 @@ tools:context="com.example.android.popmoviesearchstage1.MainActivity">
             android:id="@+id/empty_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:textAppearance="?android:textAppearanceLarge" />
 
 

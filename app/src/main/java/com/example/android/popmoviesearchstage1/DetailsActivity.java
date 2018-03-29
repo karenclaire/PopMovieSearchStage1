@@ -73,11 +73,11 @@ public class DetailsActivity extends AppCompatActivity {
             return;
         }
 
-         moviesList.get(position);
+        moviesList.get(position);
         if (mMovie == null) {
             //MOVIE DETAILS not available
             closeOnError();
-            return;
+           return;
 
         }else {
 
