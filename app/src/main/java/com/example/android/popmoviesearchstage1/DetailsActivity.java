@@ -8,10 +8,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -48,7 +48,7 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.title)TextView titleTextView;
 
 
-    public List<Movie> moviesList;
+    public List<Movie> moviesList = new ArrayList<>();
     Context mContext;
     private Movie mMovie;
     private String mUrl;
@@ -62,26 +62,11 @@ public class DetailsActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        if (intent == null) {
-            closeOnError();
-        }
 
-        int position = intent.getIntExtra("movie_id", DEFAULT_POSITION);
-        if (position == DEFAULT_POSITION) {
-            //POSITION not found in intent
-            closeOnError();
-            return;
-        }
+        mMovie= intent.getParcelableExtra("DetailsActivity.EXTRA_MOVIE");
 
-        moviesList.get(position);
-        if (mMovie == null) {
-            //MOVIE DETAILS not available
-            closeOnError();
-           return;
 
-        }else {
-
-            showMovieDetails();
+            showMovieDetails(mMovie);
             Picasso.with(mContext).setLoggingEnabled(true);
 
             Picasso.with(mContext)
@@ -89,7 +74,6 @@ public class DetailsActivity extends AppCompatActivity {
                     .into(posterImageView);
         }
 
-    }
 
 
     @Override
@@ -112,16 +96,8 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
 
-    private void closeOnError() {
-        finish();
-        Toast.makeText(this, R.string.no_movies, Toast.LENGTH_SHORT).show();
-    }
 
-
-
-    public void showMovieDetails() {
-            int position = intent.getIntExtra("movie_id", 0);
-            mMovie = moviesList.get(position);
+    public void showMovieDetails(Movie mMovie) {
             dateTextView.setText(mMovie.getReleaseDate());
             ratingTextView.setText(mMovie.getVoteAverage());
             overviewTextView.setText(mMovie.getOverview());

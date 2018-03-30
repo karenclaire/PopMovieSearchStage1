@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -39,7 +38,8 @@ import butterknife.BindView;
         * 7)https://gist.github.com/riyazMuhammad/1c7b1f9fa3065aa5a46f
 **/
 
-public class MainActivity extends AppCompatActivity  implements LoaderManager.LoaderCallbacks<List<Movie>>, SharedPreferences.OnSharedPreferenceChangeListener{
+public class MainActivity extends AppCompatActivity  implements LoaderManager.LoaderCallbacks<List<Movie>>,
+        SharedPreferences.OnSharedPreferenceChangeListener{
     /**
      * Tag for log messages
      */
@@ -137,20 +137,6 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
         // Set the adapter on the {@link GridView}
         // so the list can be populated in the user interface
         movieGridView.setAdapter(mMovieAdapter);
-
-
-        // Set an item click listener on the GridView, which sends an intent to a web browser
-        // to open a website with more information about the selected movie.
-
-        movieGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                launchDetailsActivity(position);
-            }
-
-
-        });
 
 
         // Find the reference to the progress bar in a layout
@@ -272,13 +258,7 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
         mMovieAdapter.clear();
     }
 
-    private void launchDetailsActivity(int position) {
-        Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra(DetailsActivity.EXTRA_MOVIE, position);
-        startActivity(intent);
 
-
-    }
 
     @Override
     protected void onDestroy() {

@@ -2,6 +2,7 @@ package com.example.android.popmoviesearchstage1;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -33,25 +34,24 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
     /**
      * ViewHolder for fields of the movie
      */
-       static class ViewHolder {
-     private ImageView posterImageView;
-     private TextView titleTextView;
-     private TextView dateTextView;
-     private TextView overviewTextView;
-     private TextView ratingTextView;
-     }
-
+    static class ViewHolder {
+        private ImageView posterImageView;
+        private TextView titleTextView;
+        private TextView dateTextView;
+        private TextView overviewTextView;
+        private TextView ratingTextView;
+    }
 
 
     /**
      * @param context The current context. Used to inflate the layout file.
      * @param movies  A List of movies objects to display in a list.
      */
-       private Context mContext;
+    private Context mContext;
 
-     public MovieAdapter(Activity context, ArrayList<Movie> movies) {
-     super(context, 0, movies);
-     }
+    public MovieAdapter(Activity context, ArrayList<Movie> movies) {
+        super(context, 0, movies);
+    }
 
 
     /**
@@ -67,8 +67,8 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
      */
 
     @NonNull
-     @Override
-     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup ) {
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
 
         View movieGridView = convertView;
 
@@ -90,8 +90,26 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         Picasso.with(getContext()).setLoggingEnabled(true);
 
         Picasso.with(getContext())
-                .load(POSTER_PATH +currentMovie.getPosterPath())
+                .load(POSTER_PATH + currentMovie.getPosterPath())
                 .into(holder.posterImageView);
+
+        // Set an item click listener on the GridView, which sends an intent to a web browser
+        // to open a website with more information about the selected movie.
+        movieGridView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Movie movieInformation = new Movie(currentMovie.getId(), currentMovie.getTitle(),
+                        currentMovie.getReleaseDate(), currentMovie.getOverview(),
+                        currentMovie.getVoteAverage(), currentMovie.getPosterPath());
+
+                    Intent intent = new Intent(getContext(), DetailsActivity.class);
+                    intent.putExtra(DetailsActivity.EXTRA_MOVIE, movieInformation);
+                    getContext().startActivity(intent);
+
+                }
+        });
+
 
         return movieGridView;
 
