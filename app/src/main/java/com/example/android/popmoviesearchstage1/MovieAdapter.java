@@ -113,7 +113,8 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
 
                     Intent intent = new Intent(getContext(), DetailsActivity.class);
                     intent.putExtra(DetailsActivity.EXTRA_MOVIE, movieInformation);
-                     intent.putExtra(DetailsActivity.EXTRA_POSTER, poster);
+                    //intent.putExtra(DetailsActivity.EXTRA_POSTER, poster);
+                intent.putExtra(DetailsActivity.EXTRA_POSTER, POSTER_PATH + currentMovie.getPosterPath());
                     getContext().startActivity(intent);
 
                 }

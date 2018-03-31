@@ -34,4 +34,8 @@
 
     <dimen name="margin_top_bottom_sides">16dp</dimen>
 
+    <dimen name="overview_text_size">12dp</dimen>
+
+    <dimen name="side_margins">24dp</dimen>
+
 </resources>

@@ -181,18 +181,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
-                android:layout_marginLeft="@dimen/margin_top_bottom_sides"
+                android:layout_marginLeft="@dimen/side_margins"
+                android:layout_marginStart="@dimen/side_margins"
                 android:layout_marginTop="@dimen/margin_top_bottom_sides"
-                tools:text="@string/overview" />
+                android:text="@string/overview" />
 
             <TextView
                 android:id="@+id/summary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
-                android:layout_marginLeft="@dimen/margin_top_bottom_sides"
+                android:layout_marginLeft="@dimen/side_margins"
+                android:layout_marginStart="@dimen/side_margins"
+                android:layout_marginRight="@dimen/side_margins"
+                android:layout_marginEnd="@dimen/side_margins"
                 android:layout_marginTop="@dimen/margin_top_bottom_sides"
-                android:textSize="@dimen/detail_item_text_size"
+                android:textSize="@dimen/overview_text_size"
                 tools:text="@string/overview_placeholder" />
 
             <!-- For Stage 2 Layout
