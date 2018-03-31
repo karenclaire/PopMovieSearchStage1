@@ -30,6 +30,8 @@
 
     <dimen name="right_placeholder_margin">36dp</dimen>
 
+    <dimen name ="details_top_margin">36dp</dimen>
+
     <dimen name="margin_top_bottom_sides">16dp</dimen>
 
 </resources>

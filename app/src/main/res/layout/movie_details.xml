@@ -30,7 +30,7 @@
             android:id="@+id/movie_poster"
             android:layout_width="@dimen/poster_width_detail"
             android:layout_height="@dimen/poster_height_detail"
-            android:layout_marginTop="@dimen/margin_top_bottom_sides"
+            android:layout_marginTop="@dimen/details_top_margin"
             app:layout_constraintLeft_toRightOf="@id/horizontal_middle"
             app:layout_constraintRight_toRightOf="@id/horizontal_middle"
             app:layout_constraintTop_toBottomOf="parent"

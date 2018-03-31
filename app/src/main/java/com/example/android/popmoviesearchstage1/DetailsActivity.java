@@ -35,6 +35,7 @@ public class DetailsActivity extends AppCompatActivity {
     private static final String LOG_TAG = DetailsActivity.class.getSimpleName();
 
     public static final String EXTRA_MOVIE = "intent_extra_movie";
+    public static final String EXTRA_POSTER = "intent_poster_movie";
     private static final int DEFAULT_POSITION = -1;
     private String mMovieTitle;
     public  Intent intent;
@@ -51,7 +52,7 @@ public class DetailsActivity extends AppCompatActivity {
     public List<Movie> moviesList = new ArrayList<>();
     Context mContext;
     private Movie mMovie;
-    private String mUrl;
+    private String moviePath;
 
 
     @Override
@@ -63,14 +64,16 @@ public class DetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        mMovie= intent.getParcelableExtra("DetailsActivity.EXTRA_MOVIE");
+        mMovie= intent.getParcelableExtra(DetailsActivity.EXTRA_MOVIE);
+        moviePath = intent.getStringExtra(EXTRA_POSTER);
 
 
             showMovieDetails(mMovie);
+
             Picasso.with(mContext).setLoggingEnabled(true);
 
             Picasso.with(mContext)
-                    .load(MovieAdapter.POSTER_PATH + mMovie.getPosterPath())
+                    .load(moviePath)
                     .into(posterImageView);
         }
 
