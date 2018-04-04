@@ -200,19 +200,24 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
         String topRated = sharedPrefs.getString(getString(R.string.pref_sorting_criteria_key), getString(R.string.pref_sorting_criteria_top_rated));
 
 
-        if ((PREFERENCE_UPDATED == true) || (sharedPrefs.contains(topRated))){
+       //if ((!PREFERENCE_UPDATED )|| (sharedPrefs.contains(popularity))) {
+        //if (((userPrefersTopRated = false))||(PREFERENCE_UPDATED != isTopRated(this))){
+        if ((!PREFERENCE_UPDATED )|| (PREFERENCE_UPDATED != userPrefersTopRated)) {
+
+            Uri baseUri = Uri.parse(MOVIE_REQUEST_URL);
+            Uri.Builder uriBuilder = baseUri.buildUpon();
+
+            return new MovieLoader(this, uriBuilder.toString());
+
+        }//if ((PREFERENCE_UPDATED == true) || (sharedPrefs.contains(topRated)) ){
+        if (((userPrefersTopRated = true))|| (PREFERENCE_UPDATED = isTopRated(this))){
+
 
             Uri baseUri = Uri.parse(MOVIE_TOP_RATED_URL);
             Uri.Builder uriBuilder = baseUri.buildUpon();
 
             return new MovieLoader(this, uriBuilder.toString());
 
-        }
-        if ((!PREFERENCE_UPDATED )|| (sharedPrefs.contains(popularity))) {
-            Uri baseUri = Uri.parse(MOVIE_REQUEST_URL);
-            Uri.Builder uriBuilder = baseUri.buildUpon();
-
-            return new MovieLoader(this, uriBuilder.toString());
 
         }
         return  null;
@@ -225,12 +230,12 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
    @Override
     protected void onStart() {
         super.onStart();
-        if (PREFERENCE_UPDATED){
-            Log.d(TAG, "Preferences were updated");
+        //if (PREFERENCE_UPDATED){
+         //  Log.d(TAG, "Preferences were updated");
             LoaderManager loaderManager = getLoaderManager();
             loaderManager.restartLoader((MOVIE_LOADER_ID), null, this);
             PREFERENCE_UPDATED = false;
-        }
+        //}
 
     }
 
@@ -268,10 +273,11 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            Log.d(TAG, "Preferences were updated");
-            LoaderManager loaderManager = getLoaderManager();
-            loaderManager.restartLoader((MOVIE_LOADER_ID), null, this);
-            PREFERENCE_UPDATED = true;
+         Log.d(TAG, "Preferences were updated");
+         LoaderManager loaderManager = getLoaderManager();
+         loaderManager.restartLoader((MOVIE_LOADER_ID), null, this);
+         PREFERENCE_UPDATED = true;
+
     }
 
    public static boolean isTopRated(Context context) {
@@ -291,17 +297,4 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
        return userPrefersTopRated;
     }
 
-    public MovieLoader showTopRated(){
-        Uri baseUri = Uri.parse(MOVIE_TOP_RATED_URL);
-        Uri.Builder uriBuilder = baseUri.buildUpon();
-
-        return new MovieLoader(this, uriBuilder.toString());
-    }
-
-    public MovieLoader showPopular(){
-        Uri baseUri = Uri.parse(MOVIE_REQUEST_URL);
-        Uri.Builder uriBuilder = baseUri.buildUpon();
-
-        return new MovieLoader(this, uriBuilder.toString());
-    }
 }

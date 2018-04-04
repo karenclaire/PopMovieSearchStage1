@@ -25,8 +25,8 @@
 
     <!--For settings_main sorting preferences-->
     <string name="pref_sorting_criteria_key" translatable="false">sorting_criteria</string>
-    <string name="pref_sorting_criteria_default_value">popularity</string>
-    <string name="pref_sorting_criteria_top_rated">top_rated</string>
+    <string name="pref_sorting_criteria_default_value" translatable="false">popularity</string>
+    <string name="pref_sorting_criteria_top_rated" translatable="false">top_rated</string>
 
     <!-- Text to display in the list when there is no internet connection [CHAR LIMIT=NONE] -->
     <string name="no_internet">No internet connection.</string>
