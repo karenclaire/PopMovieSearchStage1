@@ -108,23 +108,7 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
         setContentView(R.layout.activity_main);
 
 
-        // Set an item click listener on the ListView, which sends an intent to a web browser
-        // to open a website with more information about the selected movie.
-        // Find a reference to the {@link movieGridView} in the layout
-        //mRecyclerView = findViewById(R.id.recyclerview_grid);
-
-        //LinearLayoutManager layoutManager
-        //        = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-
-        //mRecyclerView.setLayoutManager(layoutManager);
-
-        /*
-         * Use this setting to improve performance if you know that changes in content do not
-         * change the child layout size in the RecyclerView
-         */
-        //mRecyclerView.setHasFixedSize(true);
-
-        GridView listView = findViewById(R.id.movie_list);
+       GridView listView = findViewById(R.id.movie_list);
 
         movieGridView = listView;
 
