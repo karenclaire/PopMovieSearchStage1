@@ -44,20 +44,12 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
     }
 
 
-    /**
-     * @param context The current context. Used to inflate the layout file.
-     * @param movies  A List of movies objects to display in a list.
-     */
     private Context mContext;
 
     public MovieAdapter(Activity context, ArrayList<Movie> movies) {
         super(context, 0, movies);
     }
 
-
-    /**
-     * @return The View for the position in the AdapterView.
-     */
 
     /**
      * @param position    The position in the list of data that should be displayed in the
@@ -82,9 +74,9 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         if (movieGridView == null) {
             movieGridView = LayoutInflater.from(getContext()).inflate(R.layout.movie_list_item, viewGroup, false);
             holder = new ViewHolder();
-            holder.ratingTextView = (TextView) movieGridView.findViewById(R.id.tv_rating);
-            holder.dateTextView = (TextView) movieGridView.findViewById(R.id.tv_date);
-            holder.posterImageView = (ImageView) movieGridView.findViewById(R.id.movie_poster);
+            holder.ratingTextView =  movieGridView.findViewById(R.id.tv_rating);
+            holder.dateTextView =  movieGridView.findViewById(R.id.tv_date);
+            holder.posterImageView = movieGridView.findViewById(R.id.movie_poster);
             movieGridView.setTag(holder);
         }
         holder = (ViewHolder) movieGridView.getTag();
