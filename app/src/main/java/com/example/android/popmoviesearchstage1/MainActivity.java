@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,13 +28,15 @@ import butterknife.BindView;
 /** * Created by karenulmer on 2/20/2018.
  *
  * References used for coding guide and corrections:
-        * 1) https://github.com/first087/Android-ViewHolder-Example/blob/master/app/src/main/java/com/artitk/android_viewholder_example/GridViewActivity.java
-        * 2)https://github.com/ajinkya007/Popular-Movies-Stage-1
-        * 3) https://github.com/bapspatil/FlickOff
-        * 4)https://github.com/henriquenfaria/popular-movies-stage-1
-        * 5) my previous udacity projects: NewsApp and BookApp
-        * 6) https://googledevndscholars.slack.com/threads/
-        * 7)https://gist.github.com/riyazMuhammad/1c7b1f9fa3065aa5a46f
+        *  https://github.com/first087/Android-ViewHolder-Example/blob/master/app/src/main/java/com/artitk/android_viewholder_example/GridViewActivity.java
+        *  https://discussions.udacity.com/t/popular-movies-stage1-help/618976/27
+        *  https://discussions.udacity.com/t/sharedpreferences-is-killing-me/163576/5
+        *  https://github.com/ajinkya007/Popular-Movies-Stage-1
+        *  https://github.com/bapspatil/FlickOff
+        *  https://github.com/henriquenfaria/popular-movies-stage-1
+        *  my previous udacity projects: NewsApp and BookApp
+        *  https://googledevndscholars.slack.com/threads/
+        *  https://gist.github.com/riyazMuhammad/1c7b1f9fa3065aa5a46f
 **/
 
 public class MainActivity extends AppCompatActivity  implements LoaderManager.LoaderCallbacks<List<Movie>>,
@@ -83,12 +84,7 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
      */
     private ProgressBar mProgressBar;
 
-    private RecyclerView mRecyclerView;
-
-
-    private static boolean PREFERENCE_UPDATED = false;
-
-    private static boolean userPrefersTopRated = true;
+    static public String prefSortOrder;
 
 
     @BindView(R.id.tv_rating)
@@ -195,47 +191,30 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
     @Override
     public Loader<List<Movie>> onCreateLoader(int i, Bundle bundle) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Uri baseUri;
 
-        String popularity = sharedPrefs.getString(getString(R.string.pref_sorting_criteria_key), getString(R.string.pref_sorting_criteria_default_value));
-        String topRated = sharedPrefs.getString(getString(R.string.pref_sorting_criteria_key), getString(R.string.pref_sorting_criteria_top_rated));
+        String sortOrder = sharedPrefs.getString(getString(R.string.pref_sorting_criteria_key),getString(R.string.pref_sorting_criteria_default_value));
 
+        if  (prefSortOrder!= null && !sortOrder.equals(prefSortOrder)){
+                //(sortOrder.equals(topRated)){
 
-       //if ((!PREFERENCE_UPDATED )|| (sharedPrefs.contains(popularity))) {
-        //if (((userPrefersTopRated = false))||(PREFERENCE_UPDATED != isTopRated(this))){
-        if ((!PREFERENCE_UPDATED )|| (PREFERENCE_UPDATED != userPrefersTopRated)) {
-
-            Uri baseUri = Uri.parse(MOVIE_REQUEST_URL);
-            Uri.Builder uriBuilder = baseUri.buildUpon();
-
-            return new MovieLoader(this, uriBuilder.toString());
-
-        }//if ((PREFERENCE_UPDATED == true) || (sharedPrefs.contains(topRated)) ){
-        if (((userPrefersTopRated = true))|| (PREFERENCE_UPDATED = isTopRated(this))){
+            baseUri = Uri.parse(MOVIE_TOP_RATED_URL);
 
 
-            Uri baseUri = Uri.parse(MOVIE_TOP_RATED_URL);
-            Uri.Builder uriBuilder = baseUri.buildUpon();
-
-            return new MovieLoader(this, uriBuilder.toString());
-
+        } else {
+            prefSortOrder = sortOrder;
+            baseUri = Uri.parse(MOVIE_REQUEST_URL);
 
         }
-        return  null;
-    }
 
-    /**
-     * In onStart, if preferences have been changed, refresh the data and set the flag to false
-     */
+            Uri.Builder uriBuilder = baseUri.buildUpon();
+            return new MovieLoader(this, uriBuilder.toString());
+
+    }
 
    @Override
     protected void onStart() {
         super.onStart();
-        //if (PREFERENCE_UPDATED){
-         //  Log.d(TAG, "Preferences were updated");
-            LoaderManager loaderManager = getLoaderManager();
-            loaderManager.restartLoader((MOVIE_LOADER_ID), null, this);
-            PREFERENCE_UPDATED = false;
-        //}
 
     }
 
@@ -276,25 +255,7 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
          Log.d(TAG, "Preferences were updated");
          LoaderManager loaderManager = getLoaderManager();
          loaderManager.restartLoader((MOVIE_LOADER_ID), null, this);
-         PREFERENCE_UPDATED = true;
+
 
     }
-
-   public static boolean isTopRated(Context context) {
-       // Return true if the user's preference for movie list is top rating movies, false otherwise
-
-       SharedPreferences sharedPrefs = PreferenceManager
-               .getDefaultSharedPreferences(context);
-       String topRatedPref = context.getString(R.string.pref_sorting_criteria_top_rated);
-       String defaultPref = context.getString(R.string.pref_sorting_criteria_default_value);
-       String preferredList = sharedPrefs.getString(topRatedPref, defaultPref);
-       String topRated = context.getString(R.string.pref_sorting_criteria_top_rated);
-       if (topRated.equals(preferredList)) {
-           userPrefersTopRated = true;
-       } else {
-           userPrefersTopRated = false;
-       }
-       return userPrefersTopRated;
-    }
-
 }
